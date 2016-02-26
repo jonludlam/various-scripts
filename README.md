@@ -40,3 +40,5 @@ Note: This script is configured to run as a daemon, and will not output to stdou
 
 ### Execution time
 Since there are literally many hundreds of thousands of XenServer hosts running in the world, it would be a bad idea for them all to wake up and check for an update at the same time. The daemon runs once at startup, and then will run daily at a predefined time which is host specific. DO NOT CHANGE THIS!!!!
+
+Note that no blog post currently exists describing its use.
