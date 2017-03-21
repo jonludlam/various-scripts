@@ -25,6 +25,14 @@ cd daily
 wget http://downloadns.citrix.com.edgesuite.net/8170/listing.html -O ./listing.html
 
 #### Warning: if the listing format every changes - this is where things break ####
+# we want to get rid of the oldest folder to make space for current - keeping last 7 should be good
+oldest=`cat listing.html | sed -n '9p' | awk '{print substr($0,4,10)}'`
+
+if [ -d "${oldest}" ]; then
+  rm -rf ${oldest}
+fi
+
+#### Warning: if the listing format every changes - this is where things break ####
 today=`cat listing.html | sed -n '2p' | awk '{print substr($0,4,10)}'`
 
 #today=2016-01-19
