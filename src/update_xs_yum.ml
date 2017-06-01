@@ -412,6 +412,8 @@ let get uri filename =
 let with_downloaded_isos uri_base source_iso f =
   let binpkg_uri = Printf.sprintf "%s/binpkg.iso" uri_base in
   let binpkg_fname = Filename.temp_file "binpkg" "iso" in
+  (* We need to upload the SRPMs too, these are required to determine the build
+     dependencies of a package *)
   let sources_uri = Printf.sprintf "%s/%s" uri_base source_iso in
   let sources_fname = Filename.temp_file "source" "iso" in
 
@@ -508,6 +510,11 @@ let _ =
     get_last_successful_build "team%252Fring3%252Ffalcon" >>= fun n ->
     run (uuid ["fa7c0ea9";"9d31";"50bb";"a8d6";"8ae367ef2f14"])
       (artifactory // "team/ring3/falcon" // n ) "source-retail.iso"
+      s3bucket >>|= fun () ->
+
+    get_last_successful_build "feature%252Fvgpu-migration%252Fmaster" >>= fun n ->
+    run (uuid ["fea752e7";"7925";"3192";"a710";"232af43eabcd"])
+      (artifactory // "feature/vgpu-migration/master" // n ) "source-retail.iso"
       s3bucket >>|= fun () ->
 
     run (uuid ["449e52a4";"271a";"483a";"baa7";"24bf362866f7"])
