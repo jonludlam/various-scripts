@@ -412,6 +412,8 @@ let get uri filename =
 let with_downloaded_isos uri_base source_iso f =
   let binpkg_uri = Printf.sprintf "%s/binpkg.iso" uri_base in
   let binpkg_fname = Filename.temp_file "binpkg" "iso" in
+  (* We need to upload the SRPMs too, these are required to determine the build
+     dependencies of a package *)
   let sources_uri = Printf.sprintf "%s/%s" uri_base source_iso in
   let sources_fname = Filename.temp_file "source" "iso" in
 
