@@ -512,6 +512,11 @@ let _ =
       (artifactory // "team/ring3/falcon" // n ) "source-retail.iso"
       s3bucket >>|= fun () ->
 
+    get_last_successful_build "feature%252Fvgpu-migration%252Fmaster" >>= fun n ->
+    run (uuid ["fea752e7";"7925";"3192";"a710";"232af43eabcd"])
+      (artifactory // "feature/vgpu-migration/master" // n ) "source-retail.iso"
+      s3bucket >>|= fun () ->
+
     run (uuid ["449e52a4";"271a";"483a";"baa7";"24bf362866f7"])
       (carbon // "ely/xe-phase-3-latest/xe-phase-3") "source.iso"
       s3bucket >>|= fun () ->
