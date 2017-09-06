@@ -21,7 +21,7 @@ depends: [
   "mirage"
   "uri"
   "iso-filesystem"
-  "cohttp"
+  "cohttp" {< "0.99.0"}
   "ssl"
   "re"
   "yojson"

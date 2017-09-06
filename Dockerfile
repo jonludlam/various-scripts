@@ -1,4 +1,4 @@
-FROM ocaml/opam:ubuntu
+FROM ocaml/opam:debian
 
 RUN sudo apt-get update
 
