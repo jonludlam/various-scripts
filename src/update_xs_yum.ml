@@ -525,11 +525,12 @@ let _ =
         (artifactory // branch // n ) "source-retail.iso"
         s3bucket) >>= fun () ->
 
-    let branch = "ely/xe-phase-3-latest/xe-phase-3" in
+    let branch = "release/honolulu/lcm" in
     best_effort_upload branch
-      (fun () -> run (uuid ["449e52a4";"271a";"483a";"baa7";"24bf362866f7"])
-        (carbon // branch) "source.iso"
-        s3bucket) >>= fun () ->
+      (fun () -> get_last_successful_build branch >>|= fun n ->
+        run (uuid ["449e52a4";"271a";"483a";"baa7";"24bf362866f7"])
+          (artifactory // branch // n) "source.iso"
+          s3bucket) >>= fun () ->
 
     let branch = "dundee-bugfix/xe-phase-3-latest/xe-phase-3" in
     best_effort_upload branch
