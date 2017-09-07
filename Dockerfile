@@ -33,5 +33,7 @@ RUN opam install -y --deps-only update_xs_yum
 # image from this point, and reuse the layer containing the build deps.
 COPY _tags Makefile update_xs_yum.install /tmp/
 COPY src/update_xs_yum.ml /tmp/src/
+# Remove leftover ocamlfind init files that ocamlbuild would complain about
+RUN make clean
 
 RUN opam install -y update_xs_yum
